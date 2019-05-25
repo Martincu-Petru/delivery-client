@@ -4,11 +4,13 @@
 
 export const environment = {
   production: false,
-  getUsernameURL: 'http://localhost:5000/',
+  getUsernameURL: 'http://localhost:5000/user/session?',
   getRestaurantsURL: 'http://localhost:5000/',
-  getUserURL: 'http://localhost:5000/user',
+  getUserURL: 'http://localhost:5000/user?',
+  postUserURL: 'http://localhost:5000/user',
+  getSessionURL: 'http://localhost:5000/session?',
   postSessionURL: 'http://localhost:5000/session',
-  postUserURL: 'http://localhost:5000/user'
+
 };
 
 /*

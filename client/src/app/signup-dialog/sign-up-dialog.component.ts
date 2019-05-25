@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { PostUserService } from '../post-user.service';
+import {PostSessionService} from '../post-session.service';
+import {Router} from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sign-up-dialog',
@@ -16,8 +19,11 @@ export class SignUpDialogComponent implements OnInit {
   firstName = new FormControl('Martincu', [Validators.required, Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')]);
   lastName = new FormControl('Petru', [Validators.required, Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')]);
 
-  constructor(private postUserService: PostUserService) {
-  }
+  constructor(
+    private postUserService: PostUserService,
+    private postSessionService: PostSessionService,
+    private routerService: Router,
+    private cookieManager: CookieService) { }
 
   ngOnInit() { }
 
@@ -54,6 +60,18 @@ export class SignUpDialogComponent implements OnInit {
       this.email.value,
       this.password.value,
       this.phoneNumber.value,
-      this.address.value);
+      this.address.value).subscribe(
+      data => {
+        console.log('POST user is successful ', data);
+        const user: any = data;
+        this.postSessionService.insert_session_database(user.user_id).subscribe(
+          sessionData => {
+            console.log('POST session is successful ', data);
+            const session: any = sessionData;
+            this.cookieManager.set('session', session.session_id, 0.25);
+            this.routerService.navigateByUrl('/home').then(() => console.log('Navigated to home screen'));
+          });
+      }
+    );
   }
 }

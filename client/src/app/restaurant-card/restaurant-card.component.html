@@ -2,18 +2,26 @@
   <mat-card-header>
     <mat-card-title>{{currentRestaurantTitle}}</mat-card-title>
   </mat-card-header>
-  <img height="300px" width="300px" mat-card-image src="{{currentRestaurantImage}}">
-  <mat-card-content>
-    Info: {{currentRestaurantSnippet}}
-  </mat-card-content>
-  <mat-card-content>
-    Address: {{currentRestaurantAddress}}
-  </mat-card-content>
-  <mat-card-content>
-    Hashtags: {{h1}}, {{h2}}, {{h3}}
-  </mat-card-content>
-  <mat-card-actions>
-    <button (click)="decrease_current_number()" [disabled]="currentRestaurantNumber == 0" mat-button>PREVIOUS</button>
-    <button (click)="increase_current_number()" [disabled]="currentRestaurantNumber == numberOfRestaurants - 1" mat-button>NEXT</button>
-  </mat-card-actions>
+  <div *ngIf="numberOfRestaurants > 0 then show_restaurants else show_waiting"></div>
+  <ng-template #show_restaurants>
+    <img mat-card-image src="{{currentRestaurantImage}}" alt="Loading image GIF">
+    <mat-card-content>
+      Info: {{currentRestaurantSnippet}}
+    </mat-card-content>
+    <mat-card-content>
+      Address: {{currentRestaurantAddress}}
+    </mat-card-content>
+    <mat-card-actions>
+      <button (click)="decrease_current_number()" [disabled]="currentRestaurantNumber == 0" mat-button>PREVIOUS</button>
+      <button (click)="increase_current_number()" [disabled]="currentRestaurantNumber == numberOfRestaurants - 1" mat-button>NEXT</button>
+    </mat-card-actions>
+  </ng-template>
+  <ng-template #show_waiting>
+    <img mat-card-image src="http://bit.do/loading-image" alt="Loading image GIF">
+    <img style="padding-left: 25%" width="200px" src="../../assets/loading-text.gif" alt="Loading text GIF">
+  </ng-template>
+
+  <!--<mat-card-content>-->
+    <!--Hashtags: {{h1}}, {{h2}}, {{h3}}-->
+  <!--</mat-card-content>-->
 </mat-card>

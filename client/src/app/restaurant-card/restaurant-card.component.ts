@@ -9,9 +9,9 @@ import { GetRestaurantsService } from '../get-restaurants.service';
 export class RestaurantCardComponent implements OnInit {
 
   currentRestaurantNumber = 0;
-  numberOfRestaurants = null;
+  numberOfRestaurants = 0;
   restaurants = null;
-  currentRestaurantImage = 'http://www.festival56.com/images/loading.gif';
+  currentRestaurantImage = null;
   currentRestaurantTitle = null;
   currentRestaurantAddress = 'Please wait...';
   currentRestaurantSnippet = 'Loading';
@@ -33,6 +33,7 @@ export class RestaurantCardComponent implements OnInit {
       // this.h2 = this.restaurants.restaurants[this.currentRestaurantNumber].hashtag[1];
       // this.h3 = this.restaurants.restaurants[this.currentRestaurantNumber].hashtag[2];
     });
+    console.log(this.numberOfRestaurants);
   }
 
   decrease_current_number() {

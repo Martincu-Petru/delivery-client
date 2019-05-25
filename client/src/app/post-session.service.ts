@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class PostSessionService {
 
-  constructor(private http: HttpClient, private cookieManager: CookieService) { }
+  constructor(private http: HttpClient) { }
 
   insert_session_database(userId: string) {
 
@@ -24,12 +24,7 @@ export class PostSessionService {
 
     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
-    this.http.post(environment.postSessionURL, { body }, options).subscribe(
-      data => {
-        console.log('POST session is successful ', data);
-        const session: any = data;
-        this.cookieManager.set('session', session.session_id, 0.25);
-      });
+    return this.http.post(environment.postSessionURL, { body }, options);
   }
 
 }
