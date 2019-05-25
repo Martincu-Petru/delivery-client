@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 
 export class PostUserService {
 
-  constructor(private http: HttpClient, private postSession: PostSessionService, private routerService: Router) { }
+  constructor(private http: HttpClient, private postSessionService: PostSessionService, private routerService: Router) { }
 
   insert_user_database(firstName: string, lastName: string, userEmail: string, userPassword: string, phoneNumber: string, userAddress: string) {
 
@@ -29,8 +29,7 @@ export class PostUserService {
       data => {
         console.log('POST user is successful ', data);
         const session: any = data;
-        this.postSession.insert_session_database(session.user_id);
-        console.log(data.valueOf());
+        this.postSessionService.insert_session_database(session.user_id);
         this.routerService.navigateByUrl('/home').then(() => console.log('Navigated to home screen'));
       }
     );

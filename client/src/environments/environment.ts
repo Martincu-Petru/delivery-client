@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   getUsernameURL: 'http://localhost:5000/',
   getRestaurantsURL: 'http://localhost:5000/',
-  getUserURL: 'http://localhost:5000/',
-  postSessionURL: 'http://localhost:5000/',
+  getUserURL: 'http://localhost:5000/user',
+  postSessionURL: 'http://localhost:5000/session',
   postUserURL: 'http://localhost:5000/user'
 };
 

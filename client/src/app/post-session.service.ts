@@ -21,7 +21,6 @@ export class PostSessionService {
         + ':' + new Date(Date.now()).getMinutes().toString()
         + ':' + new Date(Date.now()).getSeconds().toString()
     });
-    console.log('SESSION POST ', body);
 
     const options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' })};
 
