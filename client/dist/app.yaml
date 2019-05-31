@@ -4,8 +4,10 @@ threadsafe: yes
 
 handlers:
 
-  - url: /
+  - url: /(.*\.(gif|png|jpg|css|js)(|\.map))$
+    static_files: client/\1
+    upload: client/(.*)(|\.map)
+
+  - url: /(.*)
     static_files: client/index.html
     upload: client/index.html
-  - url: /
-    static_dir: client
