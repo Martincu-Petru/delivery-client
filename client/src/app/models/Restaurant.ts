@@ -1,7 +1,5 @@
 export class Restaurant {
-  title: string;
-  image_URL: string;
-  address: string;
-  snippet: string;
-  hashtag: string[];
+  id: string;
+  restaurant_name: string;
+  restaurant_image: string;
 }

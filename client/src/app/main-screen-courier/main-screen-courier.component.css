@@ -36,3 +36,10 @@
   position: absolute;
   z-index: 1;
 }
+
+.restaurant-card-container {
+  position: relative;
+  padding-top: 7%;
+  padding-left: 7%;
+  width: 30%;
+}

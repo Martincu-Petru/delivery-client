@@ -1,27 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { PostUserService } from '../post-user.service';
-import {PostSessionService} from '../post-session.service';
+import {FormControl, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CookieService} from 'ngx-cookie-service';
+import {PostCourierService} from '../post-courier.service';
+import {PostSessionCourierService} from '../post-session-courier.service';
 
 @Component({
-  selector: 'app-sign-up-dialog',
-  templateUrl: './sign-up-dialog.component.html',
-  styleUrls: ['./sign-up-dialog.component.css']
+  selector: 'app-signup-dialog-courier',
+  templateUrl: './signup-dialog-courier.component.html',
+  styleUrls: ['./signup-dialog-courier.component.css']
 })
-export class SignUpDialogComponent implements OnInit {
+export class SignupDialogCourierComponent implements OnInit {
 
   email = new FormControl('martincu.petru@gmail.com', [Validators.required, Validators.email]);
   password = new FormControl('12345678', [Validators.required, Validators.pattern(('^[a-zA-Z0-9]{8,}$'))]);
   phoneNumber = new FormControl('0747809757', [Validators.required, Validators.pattern(('^0[0-9]{9}$'))]);
-  address = new FormControl('Romania, Radauti', [Validators.required, Validators.minLength(10)]);
   firstName = new FormControl('Martincu', [Validators.required, Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')]);
   lastName = new FormControl('Petru', [Validators.required, Validators.pattern('^[a-zA-Z]+(([\',. -][a-zA-Z ])?[a-zA-Z]*)*$')]);
 
   constructor(
-    private postUserService: PostUserService,
-    private postSessionService: PostSessionService,
+    private postCourierService: PostCourierService,
+    private postSessionCourierService: PostSessionCourierService,
     private routerService: Router,
     private cookieManager: CookieService) { }
 
@@ -49,31 +48,25 @@ export class SignUpDialogComponent implements OnInit {
     return this.phoneNumber.hasError('required') ? 'You must enter a value' : '';
   }
 
-  getAddressErrorMessage() {
-    return this.address.hasError('required') ? 'You must enter a value' : '';
-  }
 
   signUp() {
-    this.postUserService.insert_user_database(
+    this.postCourierService.insert_courier_database(
       this.firstName.value,
       this.lastName.value,
       this.email.value,
       this.password.value,
-      this.phoneNumber.value,
-      this.address.value).subscribe(
+      this.phoneNumber.value).subscribe(
       data => {
-        console.log('POST user is successful ', data);
+        console.log('POST courier is successful ', data);
         const user: any = data;
-        this.postSessionService.insert_session_database(user.user_id).subscribe(
+        this.postSessionCourierService.insert_session_courier_database(user.user_id).subscribe(
           sessionData => {
-            console.log('POST session is successful ', data);
+            console.log('POST session courier is successful ', data);
             const session: any = sessionData;
-            this.cookieManager.set('session', session.session_id, 0.25);
-            this.routerService.navigateByUrl('/user/home').then(() => console.log('Navigated to home screen'));
+            this.cookieManager.set('session_courier', session.session_id, 0.25);
+            this.routerService.navigateByUrl('/courier/home').then(() => console.log('Navigated to courier home screen'));
           });
       }
     );
   }
-
-
 }

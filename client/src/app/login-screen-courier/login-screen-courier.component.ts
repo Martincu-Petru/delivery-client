@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
+import {CookieService} from 'ngx-cookie-service';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-login-screen',
-  templateUrl: './login-screen.component.html',
-  styleUrls: ['./login-screen.component.css']
+  selector: 'app-login-screen-courier',
+  templateUrl: './login-screen-courier.component.html',
+  styleUrls: ['./login-screen-courier.component.css']
 })
-
-export class LoginScreenComponent implements OnInit {
+export class LoginScreenCourierComponent implements OnInit {
 
   showLoginDialog = false;
   showSignUpDialog = false;
@@ -17,8 +16,8 @@ export class LoginScreenComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.cookieService.check('session'))  {
-      this.router.navigateByUrl('/user/home').then(() => console.log('Navigated to home screen'));
+    if (this.cookieService.check('session_courier'))  {
+      this.router.navigateByUrl('/courier/home').then(() => console.log('Navigated to courier home screen'));
     }
     document.body.style.backgroundImage = 'url(http://bit.do/background-image-login-screen)';
     document.body.style.backgroundSize = 'cover';
@@ -35,4 +34,3 @@ export class LoginScreenComponent implements OnInit {
   }
 
 }
-

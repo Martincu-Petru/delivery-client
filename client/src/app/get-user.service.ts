@@ -13,6 +13,7 @@ export class GetUserService {
   constructor(private http: HttpClient) { }
 
   get_user(email: string, password: string): Observable<HttpResponse<User>> {
+    console.log(environment.getUserURL + 'email=' + email + '&user_password=' + password);
     return this.http.get<User>(environment.getUserURL + 'email=' + email + '&user_password=' + password, { observe: 'response' });
   }
 

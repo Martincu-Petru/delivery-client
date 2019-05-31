@@ -1,27 +1,81 @@
-<mat-card *ngIf="restaurants" class="example-card">
-  <mat-card-header>
-    <mat-card-title>{{currentRestaurantTitle}}</mat-card-title>
-  </mat-card-header>
-  <div *ngIf="numberOfRestaurants > 0 then show_restaurants else show_waiting"></div>
-  <ng-template #show_restaurants>
-    <img mat-card-image src="{{currentRestaurantImage}}" alt="Loading image GIF">
-    <mat-card-content>
-      Info: {{currentRestaurantSnippet}}
-    </mat-card-content>
-    <mat-card-content>
-      Address: {{currentRestaurantAddress}}
-    </mat-card-content>
-    <mat-card-actions>
-      <button (click)="decrease_current_number()" [disabled]="currentRestaurantNumber == 0" mat-button>PREVIOUS</button>
-      <button (click)="increase_current_number()" [disabled]="currentRestaurantNumber == numberOfRestaurants - 1" mat-button>NEXT</button>
-    </mat-card-actions>
-  </ng-template>
-  <ng-template #show_waiting>
-    <img mat-card-image src="http://bit.do/loading-image" alt="Loading image GIF">
-    <img style="padding-left: 25%" width="200px" src="../../assets/loading-text.gif" alt="Loading text GIF">
-  </ng-template>
+  <div class="restaurant-card-container">
+    <div class="main-container">
+    <mat-card *ngIf="restaurants" class="example-card">
+      <mat-card-header>
+        <mat-card-title style="font-family: Restaurant-Name">{{currentRestaurantName}}</mat-card-title>
+      </mat-card-header>
+      <div *ngIf="numberOfRestaurants > 0 then show_restaurants else show_waiting"></div>
+      <ng-template #show_restaurants>
+        <img height="300px" width="300px" mat-card-image src="{{currentRestaurantImage}}" alt="Loading image GIF" (click)="getDetailedInfo()">
+        <mat-card-actions>
+          <div class="button-container">
+            <button [color]="'success'"  (click)="decrease_current_number()" [disabled]="currentRestaurantNumber == 0" mat-raised-button>PREVIOUS</button>
+            <button [color]="'success'" (click)="increase_current_number()" [disabled]="currentRestaurantNumber == numberOfRestaurants - 1" mat-raised-button>NEXT</button>
+            <button (click)="getDetailedInfo()" style="margin-left: auto" mat-raised-button color="primary">Details</button>
+          </div>
+        </mat-card-actions>
+      </ng-template>
+      <ng-template #show_waiting>
+        <img mat-card-image src="http://bit.do/loading-image" alt="Loading image GIF">
+        <img style="padding-left: 25%" width="200px" src="../../assets/loading-text.gif" alt="Loading text GIF">
+      </ng-template>
 
-  <!--<mat-card-content>-->
-    <!--Hashtags: {{h1}}, {{h2}}, {{h3}}-->
-  <!--</mat-card-content>-->
-</mat-card>
+      <!--<mat-card-content>-->
+        <!--Hashtags: {{h1}}, {{h2}}, {{h3}}-->
+      <!--</mat-card-content>-->
+    </mat-card>
+    </div>
+
+    <div *ngIf="rating == undefined" class="restaurant-details">
+      <mat-card>
+        <img height="600px" mat-card-image src="http://bit.do/loading-image" alt="Loading image GIF">
+      </mat-card>
+    </div>
+
+    <div *ngIf="snippet != undefined" class="restaurant-details">
+    <mat-card>
+      <mat-list>
+        <mat-list-item>
+          About: {{snippet}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Rating: {{rating}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Address: {{address}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>
+          Tags: {{tags}}
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <div style="margin-top: 1%"></div>
+        <div style='overflow: hidden; height:100px;'>
+          <div style="overflow-y: scroll; height:100px; padding-top: 1%">
+            <mat-list-item *ngFor="let review of reviews">
+              "{{review}}"
+            </mat-list-item>
+          </div>
+        </div>
+      </mat-list>
+      <mat-divider style="margin-top: 1%; margin-bottom: 1%;"></mat-divider>
+      <mat-selection-list #menu>
+        <div style='overflow: hidden; height:250px;'>
+          <div style="overflow-y: scroll; height:250px;">
+            <mat-list-option *ngFor="let foodChoice of foods;">
+              {{foodChoice.name}}
+              <p style="font-size: 0"> {{foodChoice.id}} </p>
+            </mat-list-option>
+          </div>
+        </div>
+      </mat-selection-list>
+      <button (click)="placeOrder(menu)" style="margin-left: auto" mat-raised-button color="primary">Place order</button>
+    </mat-card>
+    </div>
+    </div>
+
+
+
+

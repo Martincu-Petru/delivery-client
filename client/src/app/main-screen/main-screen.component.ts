@@ -17,7 +17,7 @@ export class MainScreenComponent implements OnInit {
   ngOnInit() {
     if (this.cookieService.check('session') === false) {
       console.log('No cookie set.');
-      this.router.navigateByUrl('/').then(() => console.log('Navigated to login screen'));
+      this.router.navigateByUrl('/user').then(() => console.log('Navigated to login screen'));
     } else {
       console.log('Session: ' + this.cookieService.get('session'));
       this.getUsernameService.get_user_name_session(this.cookieService.get('session')).subscribe(
@@ -35,7 +35,7 @@ export class MainScreenComponent implements OnInit {
 
   logout() {
     this.cookieService.delete('session');
-    this.router.navigateByUrl('/').then(() => console.log('Navigated to login screen'));
+    this.router.navigateByUrl('/user').then(() => console.log('Navigated to login screen'));
   }
 
 }

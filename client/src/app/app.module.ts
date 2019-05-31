@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainScreenComponent } from './main-screen/main-screen.component';
 import { RestaurantCardComponent } from './restaurant-card/restaurant-card.component';
-import { MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatRadioModule } from '@angular/material';
+import {MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatListModule, MatRadioModule} from '@angular/material';
 import { LoginScreenComponent } from './login-screen/login-screen.component';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { SignUpDialogComponent } from './signup-dialog/sign-up-dialog.component';
@@ -12,6 +12,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
+import { LoginScreenCourierComponent } from './login-screen-courier/login-screen-courier.component';
+import { LoginDialogCourierComponent } from './login-dialog-courier/login-dialog-courier.component';
+import { SignupDialogCourierComponent } from './signup-dialog-courier/signup-dialog-courier.component';
+import { MainScreenCourierComponent } from './main-screen-courier/main-screen-courier.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,11 @@ import {CookieService} from 'ngx-cookie-service';
     RestaurantCardComponent,
     LoginScreenComponent,
     LoginDialogComponent,
-    SignUpDialogComponent
+    SignUpDialogComponent,
+    LoginScreenCourierComponent,
+    LoginDialogCourierComponent,
+    SignupDialogCourierComponent,
+    MainScreenCourierComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +40,8 @@ import {CookieService} from 'ngx-cookie-service';
     BrowserAnimationsModule,
     MatCardModule,
     MatRadioModule,
-    HttpClientModule
+    HttpClientModule,
+    MatListModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

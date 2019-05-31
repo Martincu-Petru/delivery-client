@@ -3,7 +3,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { GetUserService } from '../get-user.service';
 import { PostSessionService } from '../post-session.service';
 import { Router } from '@angular/router';
-import {HttpClient} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 
 @Component({
@@ -46,7 +45,7 @@ export class LoginDialogComponent implements OnInit {
             console.log('POST session is successful ', data);
             const session: any = data;
             this.cookieManager.set('session', session.session_id, 0.25);
-            this.routerService.navigateByUrl('/home').then(() => console.log('Navigated to home screen'));
+            this.routerService.navigateByUrl('/user/home').then(() => console.log('Navigated to home screen'));
           });
       }
     );

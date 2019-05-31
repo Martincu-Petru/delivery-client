@@ -1,0 +1,24 @@
+<mat-card class="signup-container">
+  Signup
+  <mat-form-field>
+    <input matInput placeholder="First name" [formControl]="firstName" required>
+    <mat-error *ngIf="firstName.invalid">{{getFirstNameErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Last name" [formControl]="lastName" required>
+    <mat-error *ngIf="lastName.invalid">{{getLastNameErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Enter your email" [formControl]="email" required>
+    <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Enter your password" [formControl]="password" required>
+    <mat-error *ngIf="password.invalid">{{getPasswordErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Enter your phone number" [formControl]="phoneNumber" required>
+    <mat-error *ngIf="phoneNumber.invalid">{{getPhoneNumberErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <button (click)="signUp()" [disabled]="firstName.invalid || lastName.invalid || email.invalid || password.invalid" mat-raised-button color="warn" class="confirm-signup-button">Sign Up</button>
+</mat-card>
